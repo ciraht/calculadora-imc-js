@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora IMC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="space"></div>
+    <h1 class="center">Calculadora de IMC</h1>
+    <div class="j-content">
+        <div class="calculator">
+            <form>
+                <label for="peso">Informe seu peso, em kg: </label>
+                <input type="text" id="peso" required>
+                <br>
+                <label for="altura">Informe sua altura, em metros: </label>
+                <input type="text" id="altura" required>
+                <br>
+                <div class="j-content">
+                    <button type="button" id="botaoCalcular" >Calcular</button>
+                </div>
+            </form>
+            <p id="result"></p>
+            <p id="exp"></p>
+        </div>
+    </div>
+    <script>
+        function calcular() {
+            var num_p = parseFloat(document.getElementById("peso").value)
+            var num_a = parseFloat(document.getElementById("altura").value)
+            var show = document.getElementById("result")
+            var resultado = num_p/(num_a*num_a)
+            show.textContent = resultado.toFixed(2)
+            var text = document.getElementById("exp")
+            if ((num_p > 650) || (num_p < 0)){
+                show.textContent = null
+                text.textContent = 'Inserir peso válido' 
+            } else if ((num_a > 3) || (num_a < 0)){
+                show.textContent = null
+                text.textContent = 'Inserir altura válida'
+            } else if (resultado <= 18.5){
+                text.textContent = 'Abaixo do peso'
+            } else if ((resultado > 18.5 & resultado <= 24.9)){
+                text.textContent = 'Peso normal'
+            } else if ((resultado > 24.9 & resultado <= 29.9)){
+                text.textContent = 'Sobrepeso'
+            } else if ((resultado >= 30)) {
+                text.textContent = 'Obesidade'
+            } else {
+                show.textContent = null
+                text.textContent = 'Favor preencher todos os campos'
+            }
+        }
+        var botao = document.getElementById("botaoCalcular")
+        botao.addEventListener('click', calcular)   
+    </script>
+</body>
+</html>
